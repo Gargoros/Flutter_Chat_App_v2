@@ -7,26 +7,22 @@ import '../constants/style_constants.dart';
 import '../widgets/web_chat_app_bar.dart';
 import '../widgets/web_search_bar.dart';
 
-class WebScreenLayout extends StatelessWidget {
-  const WebScreenLayout({super.key});
+class WebLayoutScreen extends StatelessWidget {
+  const WebLayoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        children: [
           Expanded(
             child: SingleChildScrollView(
               child: Column(
-                children: [
-                  Column(
-                    children: const <Widget>[
-                      WebProfileBar(),
-                      WebSearchBar(),
-                      ContactsList(),
-                    ],
-                  ),
+                children: const [
+                  WebProfileBar(),
+                  WebSearchBar(),
+                  ContactsList(),
                 ],
               ),
             ),
@@ -35,49 +31,56 @@ class WebScreenLayout extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.75,
             decoration: webBackgroundImage,
             child: Column(
-              children: <Widget>[
+              children: [
                 const WebChatAppBar(),
-                const Expanded(child: ChatList()),
+                const SizedBox(height: 20),
+                const Expanded(
+                  child: ChatList(),
+                ),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.07,
                   padding: const EdgeInsets.all(10),
-                  decoration: messageContainerDecoration,
-                  color: chatBarMessage,
-                  child: Row(children: [
-                    IconButton(
+                  decoration: webComtainerDecoration,
+                  child: Row(
+                    children: [
+                      IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.emoji_emotions_outlined,
                           color: appBarIconAndTextColor,
-                        )),
-                    IconButton(
+                        ),
+                      ),
+                      IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.attach_file,
                           color: appBarIconAndTextColor,
-                        )),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10,
-                          right: 15,
-                        ),
-                        child: TextField(
-                          decoration: messageTextFieldDecoration,
                         ),
                       ),
-                    ),
-                    IconButton(
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                            right: 15,
+                          ),
+                          child: TextField(
+                            decoration: webSearchBarStyle,
+                          ),
+                        ),
+                      ),
+                      IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.mic,
                           color: appBarIconAndTextColor,
-                        )),
-                  ]),
-                )
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
