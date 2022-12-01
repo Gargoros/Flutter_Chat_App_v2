@@ -10,9 +10,19 @@ const contactSubTitle = TextStyle(fontSize: 15);
 const contactTrailing = TextStyle(fontSize: 13, color: Color(0xFF9E9E9E));
 
 const webBackgroundImage = BoxDecoration(
+    border: Border(
+      left: BorderSide(color: dividerColor),
+    ),
     image: DecorationImage(
         fit: BoxFit.cover,
         image: AssetImage("assets/images/backgroundImage.png")));
+
+const webComtainerDecoration = BoxDecoration(
+  border: Border(
+    bottom: BorderSide(color: dividerColor),
+  ),
+  color: chatBarMessage,
+);
 
 const webProfileBarDecoration = BoxDecoration(
     color: webAppBarColor,
@@ -33,23 +43,17 @@ const messegeDateTextStyle = TextStyle(
 );
 
 final webSearchBarStyle = InputDecoration(
-    hintText: searchHintTextField,
-    hintStyle: hintTextStyle,
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(
-          width: 0,
-          style: BorderStyle.none,
-        )),
     filled: true,
     fillColor: searchBarColor,
-    prefixIcon: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Icon(
-          Icons.search,
-          size: 20,
-        )),
-    contentPadding: const EdgeInsets.all(10));
+    hintText: messangeHintText,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20.0),
+      borderSide: const BorderSide(
+        width: 0,
+        style: BorderStyle.none,
+      ),
+    ),
+    contentPadding: const EdgeInsets.only(left: 20));
 
 const messageContainerDecoration = BoxDecoration(
     border: Border(
@@ -57,14 +61,16 @@ const messageContainerDecoration = BoxDecoration(
   color: dividerColor,
 )));
 
+final messageBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(20),
+    borderSide: const BorderSide(
+      width: 0,
+      style: BorderStyle.none,
+    ));
+
 final messageTextFieldDecoration = InputDecoration(
     fillColor: searchBarColor,
     filled: true,
     hintText: messangeHintText,
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: const BorderSide(
-          width: 0,
-          style: BorderStyle.none,
-        )),
+    border: messageBorder,
     contentPadding: const EdgeInsets.only(left: 20));
