@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/constants/colors_constants.dart';
-
-import '../constants/text_style_constants.dart';
+import '../constants/colors_constants.dart';
+import '../constants/style_constants.dart';
 import '../data/dummy_data/info.dart';
 
 class ContactsList extends StatelessWidget {

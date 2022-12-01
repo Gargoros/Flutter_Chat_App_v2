@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../constants/colors_constants.dart';
 import '../constants/text_constants.dart';
-import '../constants/text_style_constants.dart';
+import '../constants/style_constants.dart';
 import '../widgets/contacts_list.dart';
 
 class MobileScreenLayout extends StatelessWidget {
