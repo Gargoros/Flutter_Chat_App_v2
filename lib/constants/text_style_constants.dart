@@ -6,3 +6,8 @@ const appTitleStyle = TextStyle(
 const contactTitle = TextStyle(fontSize: 18);
 const contactSubTitle = TextStyle(fontSize: 15);
 const contactTrailing = TextStyle(fontSize: 13, color: Color(0xFF9E9E9E));
+
+const webBackgroundImage = BoxDecoration(
+    image: DecorationImage(
+        fit: BoxFit.cover,
+        image: AssetImage("assets/images/backgroundImage.png")));
