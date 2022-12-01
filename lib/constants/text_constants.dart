@@ -5,3 +5,5 @@ const statusTabText = "Status";
 const callsTabText = "Calls";
 
 const searchHintTextField = "Search or start new chat";
+
+const messangeHintText = "Type a message";
