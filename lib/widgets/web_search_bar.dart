@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/text_style_constants.dart';
+import '../constants/style_constants.dart';
 
 class WebSearchBar extends StatelessWidget {
   const WebSearchBar({super.key});
