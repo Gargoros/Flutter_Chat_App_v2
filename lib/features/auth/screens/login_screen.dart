@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextButton(
                 onPressed: pickCountry,
-                child: Text(loginTextButtonText),
+                child: const Text(loginTextButtonText),
               ),
               SizedBox(
                 height: size.height * 0.005,
