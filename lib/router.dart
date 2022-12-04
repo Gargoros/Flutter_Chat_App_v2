@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/features/auth/screens/otp_screen.dart';
+import 'package:flutter_chat_app/features/auth/screens/user_information_screen.dart';
 import './features/auth/screens/login_screen.dart';
 
 import './common/widgets/error.dart';
@@ -14,6 +15,9 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           builder: (context) => OTPScreen(
                 verificationId: verificationId,
               ));
+    case UserInformationScreen.routeName:
+      return MaterialPageRoute(
+          builder: (context) => const UserInformationScreen());
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
