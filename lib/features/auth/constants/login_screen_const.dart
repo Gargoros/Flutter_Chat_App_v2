@@ -5,5 +5,3 @@ const loginScreenSubTitleText =
 const loginTextButtonText = "Pick Country";
 const loginHintTextButton = "phone number";
 const loginCustomButtonText = "NEXT";
-
-const loginSnackBarText = "Fill out all the fields";
