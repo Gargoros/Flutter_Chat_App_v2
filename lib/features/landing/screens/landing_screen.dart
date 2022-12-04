@@ -20,7 +20,7 @@ class LandingScreen extends StatelessWidget {
           child: Column(
         children: [
           SizedBox(
-            height: size.height * 0.05,
+            height: size.height * 0.02,
           ),
           const Text(
             landingScreenTitleText,
