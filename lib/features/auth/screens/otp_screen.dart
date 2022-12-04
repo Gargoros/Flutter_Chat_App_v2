@@ -25,7 +25,7 @@ class OTPScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: backgroundColor,
         elevation: 0,
-        title: Text(otpScreenTitleText),
+        title: const Text(otpScreenTitleText),
       ),
       body: Center(
         child: Column(
@@ -34,7 +34,7 @@ class OTPScreen extends ConsumerWidget {
             SizedBox(
               height: size.height * 0.02,
             ),
-            Text(otpScreenSubText),
+            const Text(otpScreenSubText),
             SizedBox(
               width: size.width * 0.5,
               child: TextField(
