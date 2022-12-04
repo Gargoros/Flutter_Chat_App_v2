@@ -20,8 +20,8 @@ class AuthRepository {
     try {
       await auth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await auth.signInWithCredential(credential);
+        verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
+          await auth.signInWithCredential(phoneAuthCredential);
         },
         verificationFailed: (e) {
           throw Exception(e.message);
