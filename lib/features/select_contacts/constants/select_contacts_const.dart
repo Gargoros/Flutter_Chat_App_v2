@@ -1,0 +1,1 @@
+const contactsAppBarText = "Select contact";
