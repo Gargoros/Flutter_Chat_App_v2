@@ -8,6 +8,7 @@ import '../constants/text_constants.dart';
 import '../data/dummy_data/info.dart';
 
 class MobileChatScreen extends StatelessWidget {
+  static const String routeName = "/mobile-chat";
   const MobileChatScreen({super.key});
 
   @override
