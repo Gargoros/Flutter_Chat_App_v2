@@ -69,9 +69,13 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
             ],
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(
+                width: size.width * 0.1,
+              ),
               Container(
-                width: size.width * 0.85,
+                width: size.width * 0.75,
                 padding: const EdgeInsets.all(2),
                 child: TextField(
                   controller: nameController,
