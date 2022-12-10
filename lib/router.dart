@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/features/auth/screens/otp_screen.dart';
 import 'package:flutter_chat_app/features/auth/screens/user_information_screen.dart';
 import 'package:flutter_chat_app/features/select_contacts/screens/select_contacts_screen.dart';
-import 'package:flutter_chat_app/screens/mobile_chat_screen.dart';
+import 'package:flutter_chat_app/features/chat/screens/mobile_chat_screen.dart';
 import './features/auth/screens/login_screen.dart';
 
 import './common/widgets/error.dart';
@@ -24,7 +24,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
           builder: (context) => const SelectContactsScreen());
     case MobileChatScreen.routeName:
-      return MaterialPageRoute(builder: (context) => const MobileChatScreen());
+      final arguments = routeSettings.arguments as Map<String, dynamic>;
+      final name = arguments["name"];
+      final uid = arguments["uid"];
+      return MaterialPageRoute(
+          builder: (context) => MobileChatScreen(
+                name: name,
+                uid: uid,
+              ));
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
