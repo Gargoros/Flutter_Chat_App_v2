@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/screens/mobile_chat_screen.dart';
+import 'package:flutter_chat_app/features/chat/screens/mobile_chat_screen.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/common/utils/utils.dart';
@@ -44,7 +44,10 @@ class SelectContactRepository {
             .replaceAll(")", "");
         if (selectedPhoneNumber == userData.phoneNumber) {
           isFound = true;
-          Navigator.pushNamed(context, MobileChatScreen.routeName);
+          Navigator.pushNamed(context, MobileChatScreen.routeName, arguments: {
+            "name": userData.name,
+            "uid": userData.uid,
+          });
         }
       }
 
