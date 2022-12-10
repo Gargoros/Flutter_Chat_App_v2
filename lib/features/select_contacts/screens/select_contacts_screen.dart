@@ -44,6 +44,7 @@ class SelectContactsScreen extends ConsumerWidget {
                           contact.displayName,
                           style: contactNameStyle,
                         ),
+                        //subtitle: Text(contact.phones[0].number),
                         leading: contact.photo == null
                             ? null
                             : CircleAvatar(
