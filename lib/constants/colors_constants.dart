@@ -15,3 +15,4 @@ const mobileChatBoxColor = Color(0xFF1F2C34);
 
 const appBarIconAndTextColor = Color(0xFF9E9E9E);
 const customButtonColor = Color(0xFF000000);
+const bottomChatButton = Color(0xFF49a078);
