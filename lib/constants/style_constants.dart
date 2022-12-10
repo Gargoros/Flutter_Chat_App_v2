@@ -7,7 +7,8 @@ const appTitleStyle = TextStyle(
 
 const contactTitle = TextStyle(fontSize: 18);
 const contactSubTitle = TextStyle(fontSize: 15);
-const contactTrailing = TextStyle(fontSize: 13, color: Color(0xFF9E9E9E));
+const contactTrailing = TextStyle(
+    fontSize: 13, color: Color(0xFF9E9E9E), fontWeight: FontWeight.normal);
 
 const webBackgroundImage = BoxDecoration(
     border: Border(
