@@ -50,9 +50,11 @@ class MobileChatScreen extends ConsumerWidget {
         ],
       ),
       body: Column(
-        children: const [
-          Expanded(child: ChatList()),
-          BottomChatField(),
+        children: [
+          const Expanded(child: ChatList()),
+          BottomChatField(
+            recieverUserId: uid,
+          ),
         ],
       ),
     );
