@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/common/enums/message_enum.dart';
-import 'package:flutter_chat_app/common/utils/utils.dart';
-import 'package:flutter_chat_app/models/chat_contact_model.dart';
-import 'package:flutter_chat_app/models/message_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+import '/common/enums/message_enum.dart';
+import '/common/utils/utils.dart';
+import '/models/chat_contact_model.dart';
+import '/models/message_model.dart';
 
 import '../../../models/user_model.dart';
 
@@ -50,6 +50,24 @@ class ChatRepository {
             lastMessage: chatContact.lastMessage));
       }
       return contacts;
+    });
+  }
+
+  Stream<List<MessageModel>> getChatStream(String recieverUserId) {
+    return firebaseFirestore
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("chats")
+        .doc(recieverUserId)
+        .collection("messages")
+        .orderBy("timeSent")
+        .snapshots()
+        .map((event) {
+      List<MessageModel> messages = [];
+      for (var document in event.docs) {
+        messages.add(MessageModel.fromMap(document.data()));
+      }
+      return messages;
     });
   }
 
