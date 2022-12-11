@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/features/auth/controller/auth_controller.dart';
 import 'package:flutter_chat_app/features/chat/repository/chat_repository.dart';
+import 'package:flutter_chat_app/models/chat_contact_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final chatControllerProvider = Provider((ref) {
@@ -20,6 +21,10 @@ class ChatController {
     required this.chatRepository,
     required this.ref,
   });
+
+  Stream<List<ChatContact>> chatContacts() {
+    return chatRepository.getChatContacts();
+  }
 
   void sendTextMessage(
     BuildContext context,
