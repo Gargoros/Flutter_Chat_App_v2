@@ -3,10 +3,10 @@ import 'package:flutter_chat_app/features/chat/controller/chat_controller.dart';
 import 'package:flutter_chat_app/models/chat_contact_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../common/widgets/loader.dart';
-import '../features/chat/screens/mobile_chat_screen.dart';
-import '../constants/colors_constants.dart';
-import '../constants/style_constants.dart';
+import '../../../common/widgets/loader.dart';
+import '../screens/mobile_chat_screen.dart';
+import '../../../constants/colors_constants.dart';
+import '../../../constants/style_constants.dart';
 
 class ContactsList extends ConsumerWidget {
   const ContactsList({super.key});

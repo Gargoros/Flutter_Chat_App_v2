@@ -4,7 +4,7 @@ import 'package:flutter_chat_app/features/select_contacts/screens/select_contact
 import '../constants/colors_constants.dart';
 import '../constants/text_constants.dart';
 import '../constants/style_constants.dart';
-import '../widgets/contacts_list.dart';
+import '../features/chat/widgets/contacts_list.dart';
 
 class MobileScreenLayout extends StatelessWidget {
   const MobileScreenLayout({super.key});
