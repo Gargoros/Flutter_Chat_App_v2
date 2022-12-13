@@ -7,12 +7,12 @@ import '/common/widgets/loader.dart';
 import '/features/chat/controller/chat_controller.dart';
 import '/models/message_model.dart';
 
-import './my_message_card.dart';
-import './sender_message_card.dart';
+import '../../../widgets/my_message_card.dart';
+import '../../../widgets/sender_message_card.dart';
 
 class ChatList extends ConsumerStatefulWidget {
   final String recieverUserId;
-  ChatList({
+  const ChatList({
     Key? key,
     required this.recieverUserId,
   }) : super(key: key);
@@ -37,7 +37,7 @@ class _ChatListState extends ConsumerState<ChatList> {
             ref.read(chatControllerProvider).chatStream(widget.recieverUserId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Loader();
+            return const Loader();
           }
 
           SchedulerBinding.instance.addPostFrameCallback((_) {

@@ -155,7 +155,7 @@ class ChatRepository {
   }) async {
     try {
       var timeSent = DateTime.now();
-      UserModel recieverUserData;
+      UserModel? recieverUserData;
 
       var userDataMap =
           await firebaseFirestore.collection("users").doc(recieverUserId).get();
