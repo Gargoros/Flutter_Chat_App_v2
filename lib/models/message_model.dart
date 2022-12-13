@@ -2,7 +2,7 @@ import 'package:flutter_chat_app/common/enums/message_enum.dart';
 
 class MessageModel {
   final String senderId;
-  final String recieverId;
+  final String recieverid;
   final String text;
   final MessageEnum type;
   final DateTime timeSent;
@@ -11,7 +11,7 @@ class MessageModel {
 
   MessageModel({
     required this.senderId,
-    required this.recieverId,
+    required this.recieverid,
     required this.text,
     required this.type,
     required this.timeSent,
@@ -20,9 +20,9 @@ class MessageModel {
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'senderId': senderId,
-      'recieverId': recieverId,
+      'recieverid': recieverid,
       'text': text,
       'type': type.type,
       'timeSent': timeSent.millisecondsSinceEpoch,
@@ -33,12 +33,12 @@ class MessageModel {
 
   factory MessageModel.fromMap(Map<String, dynamic> map) {
     return MessageModel(
-      senderId: map['senderId'] ?? "",
-      recieverId: map['recieverId'] ?? "",
-      text: map['text'] ?? "",
-      type: (map["type"] as String).toEnum(),
+      senderId: map['senderId'] ?? '',
+      recieverid: map['recieverid'] ?? '',
+      text: map['text'] ?? '',
+      type: (map['type'] as String).toEnum(),
       timeSent: DateTime.fromMillisecondsSinceEpoch(map['timeSent']),
-      messageId: map['messageId'] ?? "",
+      messageId: map['messageId'] ?? '',
       isSeen: map['isSeen'] ?? false,
     );
   }

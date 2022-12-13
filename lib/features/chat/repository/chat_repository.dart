@@ -55,12 +55,12 @@ class ChatRepository {
 
   Stream<List<MessageModel>> getChatStream(String recieverUserId) {
     return firebaseFirestore
-        .collection("users")
+        .collection('users')
         .doc(auth.currentUser!.uid)
-        .collection("chats")
+        .collection('chats')
         .doc(recieverUserId)
-        .collection("messages")
-        .orderBy("timeSent")
+        .collection('messages')
+        .orderBy('timeSent')
         .snapshots()
         .map((event) {
       List<MessageModel> messages = [];
@@ -120,7 +120,7 @@ class ChatRepository {
   }) async {
     final message = MessageModel(
       senderId: auth.currentUser!.uid,
-      recieverId: recieverUserId,
+      recieverid: recieverUserId,
       text: text,
       type: messageType,
       timeSent: timeSent,
