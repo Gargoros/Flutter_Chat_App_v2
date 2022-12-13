@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/colors_constants.dart';
-import '../widgets/chat_list.dart';
+import '../features/chat/widgets/chat_list.dart';
 import '../features/chat/widgets/contacts_list.dart';
 import '../widgets/web_profile_bar.dart';
 import '../constants/style_constants.dart';
