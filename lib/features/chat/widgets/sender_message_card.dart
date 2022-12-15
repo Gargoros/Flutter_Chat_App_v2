@@ -47,10 +47,7 @@ class SenderMessageCard extends StatelessWidget {
                         right: 5,
                         bottom: 25,
                       ),
-                child: Text(
-                  message,
-                  style: messegInfoTextStyle,
-                ),
+                child: DisplayTextImageGif(message: message, type: type),
               ),
               Positioned(
                 bottom: 2,
@@ -59,7 +56,6 @@ class SenderMessageCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        DisplayTextImageGif(message: message, type: type),
                         Text(
                           date,
                           style: messegeDateTextStyle,
