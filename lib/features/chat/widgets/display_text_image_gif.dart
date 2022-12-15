@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/common/enums/message_enum.dart';
 
 import '../../../constants/style_constants.dart';
+import 'video_player_item.dart';
 
 class DisplayTextImageGif extends StatelessWidget {
   final String message;
@@ -21,6 +22,10 @@ class DisplayTextImageGif extends StatelessWidget {
             message,
             style: messegInfoTextStyle,
           )
-        : CachedNetworkImage(imageUrl: message);
+        : type == MessageEnum.video
+            ? VideoPlayerItem(
+                videoUrl: message,
+              )
+            : CachedNetworkImage(imageUrl: message);
   }
 }
