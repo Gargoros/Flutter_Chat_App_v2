@@ -1,17 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import '../constants/colors_constants.dart';
-import '../constants/style_constants.dart';
+import 'package:flutter_chat_app/common/enums/message_enum.dart';
 
-class SenderMessageCard extends StatelessWidget {
+import '../../../constants/colors_constants.dart';
+import '../../../constants/style_constants.dart';
+import 'display_text_image_gif.dart';
+
+class MyMessageCard extends StatelessWidget {
   final String message;
   final String date;
-  const SenderMessageCard(
-      {super.key, required this.message, required this.date});
+  final MessageEnum type;
+  const MyMessageCard({
+    Key? key,
+    required this.message,
+    required this.date,
+    required this.type,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.centerRight,
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minWidth: MediaQuery.of(context).size.width * 0.3,
@@ -19,7 +28,7 @@ class SenderMessageCard extends StatelessWidget {
         ),
         child: Card(
           elevation: 1,
-          color: senderMessageColor,
+          color: messageColor,
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -27,19 +36,25 @@ class SenderMessageCard extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 10,
-                  right: 30,
-                  top: 5,
-                  bottom: 20,
-                ),
-                child: Text(
-                  message,
-                  style: messegInfoTextStyle,
-                ),
-              ),
+                  padding: type == MessageEnum.text
+                      ? const EdgeInsets.only(
+                          left: 10,
+                          right: 30,
+                          top: 5,
+                          bottom: 20,
+                        )
+                      : const EdgeInsets.only(
+                          left: 5,
+                          top: 5,
+                          right: 5,
+                          bottom: 25,
+                        ),
+                  child: DisplayTextImageGif(
+                    message: message,
+                    type: type,
+                  )),
               Positioned(
-                bottom: 2,
+                bottom: 4,
                 right: 10,
                 child: Row(
                   children: [
