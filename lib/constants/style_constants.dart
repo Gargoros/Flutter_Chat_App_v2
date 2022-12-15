@@ -46,7 +46,7 @@ const messegeDateTextStyle = TextStyle(
 final webSearchBarStyle = InputDecoration(
     filled: true,
     fillColor: searchBarColor,
-    hintText: messangeHintText,
+    hintText: messageHintText,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
       borderSide: const BorderSide(
@@ -72,6 +72,6 @@ final messageBorder = OutlineInputBorder(
 final messageTextFieldDecoration = InputDecoration(
     fillColor: searchBarColor,
     filled: true,
-    hintText: messangeHintText,
+    hintText: messageHintText,
     border: messageBorder,
     contentPadding: const EdgeInsets.only(left: 20));
