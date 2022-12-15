@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/common/enums/message_enum.dart';
 import 'package:flutter_chat_app/common/utils/utils.dart';
@@ -23,7 +24,9 @@ class BottomChatField extends ConsumerStatefulWidget {
 
 class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   bool isShowSendButton = false;
+  bool isShowEmojjiContainer = false;
   final TextEditingController _messageController = TextEditingController();
+  FocusNode focusNode = FocusNode();
 
   void sendTextMessage() async {
     if (isShowSendButton) {
@@ -61,6 +64,32 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
+  void showEmojiContainer() {
+    setState(() {
+      isShowEmojjiContainer = true;
+    });
+  }
+
+  void hideEmojiContainer() {
+    setState(() {
+      isShowEmojjiContainer = false;
+    });
+  }
+
+  void showKeyboard() => focusNode.requestFocus();
+
+  void hideKeyboard() => focusNode.unfocus();
+
+  void toggleEmojiKeyboardcontainer() {
+    if (isShowEmojjiContainer) {
+      showKeyboard();
+      hideEmojiContainer();
+    } else {
+      hideKeyboard();
+      showEmojiContainer();
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -71,95 +100,120 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: TextFormField(
-              controller: _messageController,
-              onChanged: (value) {
-                if (value.isNotEmpty) {
-                  setState(() {
-                    isShowSendButton = true;
-                  });
-                } else {
-                  isShowSendButton = false;
-                }
-              },
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: mobileChatBoxColor,
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: SizedBox(
-                    width: 100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.emoji_emotions,
-                            color: appBarIconAndTextColor,
-                          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  focusNode: focusNode,
+                  controller: _messageController,
+                  onChanged: (value) {
+                    if (value.isNotEmpty) {
+                      setState(() {
+                        isShowSendButton = true;
+                      });
+                    } else {
+                      isShowSendButton = false;
+                    }
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: mobileChatBoxColor,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: SizedBox(
+                        width: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            IconButton(
+                              onPressed: toggleEmojiKeyboardcontainer,
+                              icon: const Icon(
+                                Icons.emoji_emotions,
+                                color: appBarIconAndTextColor,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.gif_box,
+                                color: appBarIconAndTextColor,
+                              ),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.gif_box,
-                            color: appBarIconAndTextColor,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: SizedBox(
+                        width: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              onPressed: selectImage,
+                              icon: const Icon(
+                                Icons.camera_alt,
+                                color: appBarIconAndTextColor,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: selectVideo,
+                              icon: const Icon(
+                                Icons.attach_file,
+                                color: appBarIconAndTextColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    hintText: messageHintText,
+                    contentPadding: const EdgeInsets.all(10),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        )),
                   ),
                 ),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: SizedBox(
-                    width: 100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: selectImage,
-                          icon: const Icon(
-                            Icons.camera_alt,
-                            color: appBarIconAndTextColor,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: selectVideo,
-                          icon: const Icon(
-                            Icons.attach_file,
-                            color: appBarIconAndTextColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                hintText: messangeHintText,
-                contentPadding: const EdgeInsets.all(10),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    )),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8, right: 2, left: 2),
+                child: CircleAvatar(
+                  backgroundColor: bottomChatButton,
+                  radius: 25,
+                  child: GestureDetector(
+                    onTap: sendTextMessage,
+                    child: Icon(
+                      isShowSendButton ? Icons.send : Icons.mic,
+                      color: textColor,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          CircleAvatar(
-            backgroundColor: bottomChatButton,
-            radius: 25,
-            child: GestureDetector(
-              onTap: sendTextMessage,
-              child: Icon(
-                isShowSendButton ? Icons.send : Icons.mic,
-                color: textColor,
-              ),
-            ),
-          )
+          isShowEmojjiContainer
+              ? SizedBox(
+                  height: 310,
+                  child: EmojiPicker(
+                    onEmojiSelected: (category, emoji) {
+                      setState(() {
+                        _messageController.text =
+                            _messageController.text + emoji.emoji;
+                      });
+                      if (!isShowSendButton) {
+                        setState(() {
+                          isShowSendButton = true;
+                        });
+                      }
+                    },
+                  ))
+              : const SizedBox(),
         ],
       ),
     );
