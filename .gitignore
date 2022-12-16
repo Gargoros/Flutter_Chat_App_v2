@@ -51,3 +51,4 @@ ios/firebase_app_id_file.json
 pubspec.lock
 pubspec.lock
 ios/Podfile.lock
+lib/common/utils/gif_api_key.dart
