@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/colors_constants.dart';
-import '../widgets/chat_list.dart';
-import '../widgets/contacts_list.dart';
+import '../features/chat/widgets/chat_list.dart';
+import '../features/chat/widgets/contacts_list.dart';
 import '../widgets/web_profile_bar.dart';
 import '../constants/style_constants.dart';
 import '../widgets/web_chat_app_bar.dart';
@@ -34,8 +34,10 @@ class WebLayoutScreen extends StatelessWidget {
               children: [
                 const WebChatAppBar(),
                 const SizedBox(height: 20),
-                const Expanded(
-                  child: ChatList(),
+                Expanded(
+                  child: ChatList(
+                    recieverUserId: "",
+                  ),
                 ),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.07,

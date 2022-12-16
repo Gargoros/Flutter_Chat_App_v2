@@ -7,7 +7,8 @@ const appTitleStyle = TextStyle(
 
 const contactTitle = TextStyle(fontSize: 18);
 const contactSubTitle = TextStyle(fontSize: 15);
-const contactTrailing = TextStyle(fontSize: 13, color: Color(0xFF9E9E9E));
+const contactTrailing = TextStyle(
+    fontSize: 13, color: Color(0xFF9E9E9E), fontWeight: FontWeight.normal);
 
 const webBackgroundImage = BoxDecoration(
     border: Border(
@@ -45,7 +46,7 @@ const messegeDateTextStyle = TextStyle(
 final webSearchBarStyle = InputDecoration(
     filled: true,
     fillColor: searchBarColor,
-    hintText: messangeHintText,
+    hintText: messageHintText,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
       borderSide: const BorderSide(
@@ -71,6 +72,6 @@ final messageBorder = OutlineInputBorder(
 final messageTextFieldDecoration = InputDecoration(
     fillColor: searchBarColor,
     filled: true,
-    hintText: messangeHintText,
+    hintText: messageHintText,
     border: messageBorder,
     contentPadding: const EdgeInsets.only(left: 20));
