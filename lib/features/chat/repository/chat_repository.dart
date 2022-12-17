@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/common/repositories/common_firebase_storage_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+import '../../../common/providers/message_replied_provider.dart';
 import '/common/enums/message_enum.dart';
 import '/common/utils/utils.dart';
 import '/models/chat_contact_model.dart';
@@ -120,6 +121,8 @@ class ChatRepository {
     required String userName,
     required String recieverUserName,
     required MessageEnum messageType,
+    required MessageReply? messageReply,
+    required String senderUseerName,
   }) async {
     final message = MessageModel(
       senderId: auth.currentUser!.uid,
@@ -129,6 +132,14 @@ class ChatRepository {
       timeSent: timeSent,
       messageId: messageId,
       isSeen: false,
+      repliedMessage: messageReply == null ? "" : messageReply.message,
+      repliedMessageType:
+          messageReply == null ? MessageEnum.text : messageReply.messageEnum,
+      repliedTo: messageReply == null
+          ? ""
+          : messageReply.isMe
+              ? senderUseerName
+              : recieverUserName,
     );
 
     await firebaseFirestore
@@ -155,6 +166,7 @@ class ChatRepository {
     required String text,
     required String recieverUserId,
     required UserModel senderUser,
+    required MessageReply? messageReply,
   }) async {
     try {
       var timeSent = DateTime.now();
@@ -182,6 +194,8 @@ class ChatRepository {
         text: text,
         timeSent: timeSent,
         userName: senderUser.name,
+        messageReply: messageReply,
+        senderUseerName: senderUser.name,
       );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
@@ -195,6 +209,7 @@ class ChatRepository {
     required UserModel senderUserData,
     required ProviderRef ref,
     required MessageEnum messageEnum,
+    required MessageReply? messageReply,
   }) async {
     try {
       var timeSent = DateTime.now();
@@ -221,7 +236,7 @@ class ChatRepository {
           contactMessage = "🎦 Video ";
           break;
         case MessageEnum.audio:
-          contactMessage = "🎧 Music ";
+          contactMessage = "🎧 Audio ";
           break;
         case MessageEnum.gif:
           contactMessage = "🧩 Gif ";
@@ -242,13 +257,16 @@ class ChatRepository {
       );
 
       _saveMessageToMessageSubcollection(
-          recieverUserId: recieverUserId,
-          text: fileUrl,
-          timeSent: timeSent,
-          messageId: messageId,
-          userName: senderUserData.name,
-          recieverUserName: recieverUserData.name,
-          messageType: messageEnum);
+        recieverUserId: recieverUserId,
+        text: fileUrl,
+        timeSent: timeSent,
+        messageId: messageId,
+        userName: senderUserData.name,
+        recieverUserName: recieverUserData.name,
+        messageType: messageEnum,
+        messageReply: messageReply,
+        senderUseerName: senderUserData.name,
+      );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
@@ -259,6 +277,7 @@ class ChatRepository {
     required String gifUrl,
     required String recieverUserId,
     required UserModel senderUser,
+    required MessageReply? messageReply,
   }) async {
     try {
       var timeSent = DateTime.now();
@@ -286,7 +305,37 @@ class ChatRepository {
         text: gifUrl,
         timeSent: timeSent,
         userName: senderUser.name,
+        messageReply: messageReply,
+        senderUseerName: senderUser.name,
       );
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
+
+  void setChatMessageSeen(
+    BuildContext context,
+    String recieverUserId,
+    String messageId,
+  ) async {
+    try {
+      await firebaseFirestore
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .collection("chats")
+          .doc(recieverUserId)
+          .collection("messages")
+          .doc(messageId)
+          .update({"isSeen": true});
+
+      await firebaseFirestore
+          .collection("users")
+          .doc(recieverUserId)
+          .collection("chats")
+          .doc(auth.currentUser!.uid)
+          .collection("messages")
+          .doc(messageId)
+          .update({"isSeen": true});
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
