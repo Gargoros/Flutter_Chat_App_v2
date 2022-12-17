@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/common/enums/message_enum.dart';
+import 'package:flutter_chat_app/common/providers/message_replied_provider.dart';
 import 'package:flutter_chat_app/common/utils/utils.dart';
+import 'package:flutter_chat_app/features/chat/widgets/message_replay_preview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path_provider/path_provider.dart';
@@ -150,10 +152,13 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
 
   @override
   Widget build(BuildContext context) {
+    final messageReplay = ref.watch(messageReplayProvider);
+    final isShowMessageReplay = messageReplay != null;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
+          isShowMessageReplay ? const MessageReplayPreview() : const SizedBox(),
           Row(
             children: [
               Expanded(
@@ -166,7 +171,9 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                         isShowSendButton = true;
                       });
                     } else {
-                      isShowSendButton = false;
+                      setState(() {
+                        isShowSendButton = false;
+                      });
                     }
                   },
                   decoration: InputDecoration(
