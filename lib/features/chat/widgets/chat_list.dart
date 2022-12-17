@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_chat_app/common/enums/message_enum.dart';
+import 'package:flutter_chat_app/common/providers/message_replied_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '/common/widgets/loader.dart';
@@ -30,6 +32,12 @@ class _ChatListState extends ConsumerState<ChatList> {
     messageController.dispose();
   }
 
+  void onMessageSwipe(String message, bool isMe, MessageEnum messageEnum) {
+    ref
+        .read(messageReplayProvider.notifier)
+        .update((state) => MessageReply(message, isMe, messageEnum));
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<MessageModel>>(
@@ -56,12 +64,25 @@ class _ChatListState extends ConsumerState<ChatList> {
                   message: messageData.text,
                   date: timeSent,
                   type: messageData.type,
+                  repliedText: messageData.repliedMessage,
+                  onLeftSwipe: () => onMessageSwipe(
+                    messageData.text,
+                    true,
+                    messageData.type,
+                  ),
+                  repliedMessageType: messageData.repliedMessageType,
+                  userName: messageData.repliedTo,
                 );
               } else {
                 return SenderMessageCard(
                   message: messageData.text,
                   date: timeSent,
                   type: messageData.type,
+                  onRightSwipe: () =>
+                      onMessageSwipe(messageData.text, false, messageData.type),
+                  repliedMessageType: messageData.repliedMessageType,
+                  repliedText: messageData.repliedMessage,
+                  userName: messageData.repliedTo,
                 );
               }
             }),
