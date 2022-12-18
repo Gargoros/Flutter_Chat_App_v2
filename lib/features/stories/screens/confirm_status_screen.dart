@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/features/stories/controller/status_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/colors_constants.dart';
@@ -13,6 +14,11 @@ class ConfirmStatusScreen extends ConsumerWidget {
     required this.file,
   }) : super(key: key);
 
+  void addStatus(WidgetRef ref, BuildContext context) {
+    ref.read(statusControllerProvider).addStatus(file, context);
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -23,7 +29,7 @@ class ConfirmStatusScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => addStatus(ref, context),
         backgroundColor: bottomChatButton,
         child: const Icon(
           Icons.done,
