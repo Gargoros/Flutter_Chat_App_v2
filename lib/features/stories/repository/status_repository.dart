@@ -11,6 +11,11 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+final statusRepositoryProvider = Provider((ref) => StatusRepository(
+    firebaseFirestore: FirebaseFirestore.instance,
+    auth: FirebaseAuth.instance,
+    ref: ref));
+
 class StatusRepository {
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth auth;
@@ -62,8 +67,6 @@ class StatusRepository {
       var statusSnapshot = await firebaseFirestore
           .collection("status")
           .where("uid", isEqualTo: auth.currentUser!.uid)
-          .where("createdAt",
-              isLessThan: DateTime.now().subtract(const Duration(hours: 24)))
           .get();
       if (statusSnapshot.docs.isNotEmpty) {
         StatusModel status = StatusModel.fromMap(statusSnapshot.docs[0].data());
@@ -93,7 +96,10 @@ class StatusRepository {
           .doc(statusId)
           .set(status.toMap());
     } catch (e) {
-      showSnackBar(context: context, content: (e).toString());
+      showSnackBar(context: context, content: e.toString());
     }
   }
 }
+
+          // .where("createdAt",
+          //     isLessThan: DateTime.now().subtract(const Duration(hours: 24)))
